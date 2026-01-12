@@ -1,0 +1,426 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN DE TEMAS
+   ========================================================================== */
+:root {
+    --primary: #0d6efd;
+    --accent: #00d2ff;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+}
+
+/* MODO NOCHE: Tipografía Blanca y Fondo Oscuro */
+[data-theme="dark"] {
+    --bg-main: #0a0b10;
+    --bg-soft: #111420;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-main: #ffffff; 
+    --text-muted: #f3f4f6;
+    --nav-bg: rgba(10, 11, 16, 0.95);
+    /* Formulario en Modo Noche */
+    --input-fill: rgba(255, 255, 255, 0.05);
+    --input-text: #ffffff; /* Letra blanca al escribir */
+}
+
+/* MODO CLARO: Tipografía Oscura y Fondo Claro */
+[data-theme="light"] {
+    --bg-main: #f8fafc;
+    --bg-soft: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --nav-bg: rgba(248, 250, 252, 0.9);
+    /* Formulario en Modo Claro */
+    --input-fill: #ffffff;
+    --input-text: #000000; /* Letra negra al escribir */
+}
+
+/* ==========================================================================
+   2. ESTILOS BASE Y REGLAS DE TEXTO (LEGIBILIDAD TOTAL)
+   ========================================================================== */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Fuerza el blanco en toda la tipografía en Modo Noche */
+[data-theme="dark"] p, 
+[data-theme="dark"] li, 
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] span,
+[data-theme="dark"] .nav-link {
+    color: #ffffff !important;
+}
+
+/* Neutraliza el bg-light de Bootstrap en Modo Noche */
+[data-theme="dark"] .bg-light {
+    background-color: var(--bg-soft) !important;
+}
+
+section { padding: 100px 0; }
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary), var(--accent));
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   3. NAVEGACIÓN Y HERO SECTION
+   ========================================================================== */
+.custom-nav {
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 15px 0;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at 10% 20%, rgba(13, 110, 253, 0.12), transparent 45%);
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+/* Iconos de Font Awesome en el Hero */
+.hero-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.hero-icons i {
+    font-size: 2.8rem;
+    color: var(--primary);
+    transition: var(--transition);
+    filter: drop-shadow(0 0 8px rgba(13, 110, 253, 0.3));
+}
+
+.hero-icons i:hover {
+    color: var(--accent);
+    transform: translateY(-10px) scale(1.15);
+    filter: drop-shadow(0 0 15px var(--accent));
+}
+
+/* ==========================================================================
+   4. TRAYECTORIA (TIMELINE)
+   ========================================================================== */
+.timeline-item {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--primary);
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background: var(--bg-main);
+    border: 4px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--primary);
+}
+
+/* ==========================================================================
+   5. STACK Y PORTAFOLIO (CARDS)
+   ========================================================================== */
+.tech-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.tech-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    background: rgba(13, 110, 253, 0.1);
+}
+
+.project.card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    height: 100%;
+    transition: var(--transition);
+}
+
+.project.card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.project h5 {
+    color: var(--accent) !important;
+    font-weight: 700;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff !important;
+    border: 1px solid var(--glass-border);
+    padding: 6px 12px;
+}
+
+/* ==========================================================================
+   6. FORMULARIO DE CONTACTO (CORRECCIÓN DE MENSAJE)
+   ========================================================================== */
+.glass-form {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.custom-input {
+    background-color: var(--input-fill) !important;
+    color: var(--input-text) !important; /* Texto visible al escribir */
+    border: 1px solid var(--glass-border) !important;
+    padding: 15px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+}
+
+.custom-input::placeholder {
+    color: rgba(150, 150, 150, 0.7) !important;
+}
+
+/* ==========================================================================
+   6. FOOTER COMPLETO (NUEVO)
+   ========================================================================== */
+.footer-main {
+    background: #05060a;
+    padding: 60px 0 30px 0;
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer-brand {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.footer-divider {
+    margin: 40px 0 25px 0;
+    border-color: var(--glass-border);
+    opacity: 0.5;
+}
+
+.footer-nav { display: flex; flex-direction: column; gap: 10px; }
+
+.footer-nav a {
+    text-decoration: none;
+    color: var(--text-muted) !important;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.footer-nav a:hover { color: var(--primary) !important; padding-right: 5px; }
+
+.copyright { font-size: 0.85rem; color: var(--text-muted); }
+
+.ls-2 { letter-spacing: 2px; }
+
+
+.social-links { display: flex; gap: 1rem; }
+
+.social-links a {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-links i { font-size: 1.4rem; color: var(--primary); transition: var(--transition); }
+
+.social-links a:hover {
+    background: var(--primary);
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.social-links a:hover i { color: #ffffff; filter: drop-shadow(0 0 8px #ffffff); }
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.03); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* =============================
+   TOP REPOSITORIOS – GITHUB
+============================= */
+
+#repositorios {
+    background:
+        radial-gradient(circle at top,
+            rgba(0, 210, 255, 0.08),
+            transparent 55%
+        ),
+        #0a0b10;
+    position: relative;
+}
+
+/* TÍTULOS */
+#repositorios h2 {
+    color: #ffffff;
+    letter-spacing: 0.04em;
+}
+
+#repositorios .text-primary {
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#repositorios p {
+    color: #9aa0a6;
+}
+
+/* GRID */
+#github-repos {
+    min-height: 260px;
+}
+
+/* CARD REPO */
+#repositorios .project-card {
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.02)
+    );
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* EFECTO LUZ */
+#repositorios .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        400px circle at top left,
+        rgba(13,110,253,0.18),
+        transparent 45%
+    );
+    opacity: 0;
+    transition: 0.35s ease;
+}
+
+#repositorios .project-card:hover::before {
+    opacity: 1;
+}
+
+/* HOVER */
+#repositorios .project-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(13,110,253,0.5);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.55),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ICONOS */
+#repositorios .project-card i {
+    transition: 0.3s ease;
+}
+
+#repositorios .project-card:hover i {
+    color: #00d2ff;
+    transform: scale(1.15);
+}
+
+/* BADGE LENGUAJE */
+#repositorios .badge-tech {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    color: #fff;
+}
+
+/* FECHA */
+#repositorios .text-muted {
+    color: #9aa0a6 !important;
+}
+
+/* LOADER */
+#repositorios .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* BOTÓN */
+#repositorios .btn-outline-primary {
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    transition: 0.3s ease;
+}
+
+#repositorios .btn-outline-primary:hover {
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 15px 35px rgba(13,110,253,0.45);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    #repositorios h2 {
+        font-size: 1.8rem;
+    }
+}
