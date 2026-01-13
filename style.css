@@ -424,3 +424,215 @@ section { padding: 100px 0; }
         font-size: 1.8rem;
     }
 }
+
+/* ======================================================================
+   7. EFECTOS GLOBALES AVANZADOS (MICRO-INTERACCIONES)
+====================================================================== */
+
+/* Suaviza todo */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animación flotante reutilizable */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+/* Glow animado */
+@keyframes glow {
+    0% { box-shadow: 0 0 0 rgba(13,110,253,0); }
+    50% { box-shadow: 0 0 25px rgba(13,110,253,0.35); }
+    100% { box-shadow: 0 0 0 rgba(13,110,253,0); }
+}
+
+/* ======================================================================
+   8. HERO MEJORADO (IMPACTO VISUAL)
+====================================================================== */
+
+.hero h1 {
+    background: linear-gradient(135deg, #ffffff, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero .glass-card {
+    animation: float 6s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Luz diagonal */
+.hero .glass-card::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        transparent
+    );
+    transform: rotate(25deg);
+    animation: shine 8s infinite linear;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(25deg); }
+    100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* ======================================================================
+   9. BOTONES PREMIUM
+====================================================================== */
+
+.btn {
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    border: none;
+    box-shadow: 0 15px 40px rgba(13,110,253,0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    animation: glow 2s infinite;
+}
+
+/* ======================================================================
+   10. CARDS PRO (STACK + PROYECTOS)
+====================================================================== */
+
+.tech-card,
+.project.card,
+.project-card {
+    position: relative;
+}
+
+.tech-card::after,
+.project.card::after,
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    pointer-events: none;
+}
+
+/* Hover más fluido */
+.tech-card:hover i,
+.project.card:hover i {
+    transform: scale(1.2);
+    color: var(--accent);
+}
+
+/* ======================================================================
+   11. TIMELINE MEJORADA
+====================================================================== */
+
+.timeline-item {
+    transition: var(--transition);
+}
+
+.timeline-item:hover {
+    transform: translateX(8px);
+}
+
+.timeline-item:hover::before {
+    box-shadow: 0 0 20px var(--accent);
+    border-color: var(--accent);
+}
+
+/* ======================================================================
+   12. FORMULARIO MÁS MODERNO
+====================================================================== */
+
+.custom-input {
+    backdrop-filter: blur(10px);
+}
+
+.custom-input:focus {
+    background: rgba(13,110,253,0.05);
+}
+
+/* ======================================================================
+   13. FOOTER CON EFECTO DEPTH
+====================================================================== */
+
+.footer-main {
+    background:
+        radial-gradient(circle at top,
+            rgba(13,110,253,0.12),
+            transparent 50%
+        ),
+        #05060a;
+}
+
+.footer-brand {
+    background: linear-gradient(135deg, #0d6efd, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ======================================================================
+   14. REPOSITORIOS – EFECTO WOW
+====================================================================== */
+
+#repositorios .project-card {
+    cursor: pointer;
+}
+
+#repositorios .project-card:hover {
+    animation: float 4s ease-in-out infinite;
+}
+
+#repositorios .project-card:hover .badge-tech {
+    box-shadow: 0 0 20px rgba(0,210,255,0.6);
+}
+
+/* ======================================================================
+   15. SCROLL REVEAL (COMPATIBLE CON AOS)
+====================================================================== */
+
+[data-aos] {
+    transition-duration: 1s !important;
+}
+
+
+.hero .glass-card::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+    transform: rotate(25deg);
+    animation: shine 8s infinite linear;
+    pointer-events: none; /* <--- AGREGA ESTO: Evita que la luz bloquee los links */
+}
